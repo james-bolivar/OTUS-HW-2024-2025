@@ -1,0 +1,17 @@
+---
+- name: Prepare server
+  hosts: all
+  come: true
+  tasks:
+    - name: Update and upgrade packages
+      ansible-builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+    - name: Upgrade all packages
+      ansible.builtin.apt:
+        upgrade: true
+    - name: Add Nginx official GPG key
+      ansible.builtin-get_url:
+        url: https://nginx.org/keys/nginx_signing.key
+        dest: /us/share/keyrings/nginx-archive-keyring.asc
+...

@@ -1,0 +1,47 @@
+---
+- name: Prepare server
+  hosts: all
+  become: true
+  tasks:
+    - name: Update and upgrade packages
+      ansible-builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      notify: Upgrade all packages
+
+    - name: Add Nginx official GPG key
+      ansible.builtin.get_url:
+        url: https://nginx.org/keys/nginx_signing.key     
+        dest: /us/share/keyrings/nginx-archive-keyring.asc
+
+    - name: Add nginx repo
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.asc] http://nginx.org/packages/ubuntu {{ ansible_distribution_release }} nginx"
+        state: present
+
+    - name: Set nginx package priority
+      ansible.builtin.copy:
+        dest: /etc/apt/preferences.d/nginx
+        content: |
+          Package: *
+          Pin: origin nginx.org
+          Pin: release o=nginx
+          Pin-Priority: 900
+
+    - name: install nginx
+      ansible.builtin.apt:
+        pkg: nginx
+        state: present
+      notify: Start nginx
+
+    handlers:
+    - name: Upgrade all packages
+      ansible.builtin.apt:
+        upgrade: true
+
+    - name: Start nginx
+      ansible.builtin.systemd_service:
+        unit: nginx
+        state: started
+        enabled: true
+...

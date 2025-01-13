@@ -1,1 +1,2 @@
-ubuntu.otus.vctr.su
+[webservers]
+ubuntu.otus.vctr.su fqdn=ubuntu.otus.vctr.su

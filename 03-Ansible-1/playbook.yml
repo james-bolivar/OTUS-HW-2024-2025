@@ -11,7 +11,7 @@
 
     - name: Add Nginx official GPG key
       ansible.builtin.get_url:
-        url: https://nginx.org/keys/nginx_signing.key     
+        url: https://nginx.org/keys/nginx_signing.key
         dest: /us/share/keyrings/nginx-archive-keyring.asc
 
     - name: Add nginx repo

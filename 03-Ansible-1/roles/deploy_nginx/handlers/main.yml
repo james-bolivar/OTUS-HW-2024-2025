@@ -1,6 +1,5 @@
 ---
 # handlers file for deploy_nginx
-
 - name: Upgrade all packages
   ansible.builtin.apt:
     upgrade: true

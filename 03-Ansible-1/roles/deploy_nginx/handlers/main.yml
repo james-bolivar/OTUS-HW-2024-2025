@@ -1,2 +1,17 @@
 ---
 # handlers file for deploy_nginx
+- name: Upgrade all packages
+  ansible.builtin.apt:
+    upgrade: true
+
+- name: Start nginx
+  ansible.builtin.systemd_service:
+    unit: nginx
+    state: started
+    enabled: true
+
+- name: Restart nginx
+  ansible.builtin.systemd_service:
+    unit: nginx
+    state: restarted
+    enabled: true

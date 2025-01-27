@@ -7,7 +7,6 @@ server {
     error_log /var/log/nginx/{{ fqdn }}_error_log;
 
     location / {
-        fastcgi_pass unix:{{ fastcgi_pass_path }};
         proxy_redirect     off;
         proxy_set_header   Host             $host;
         proxy_set_header   X-Forwarded-Proto $scheme;

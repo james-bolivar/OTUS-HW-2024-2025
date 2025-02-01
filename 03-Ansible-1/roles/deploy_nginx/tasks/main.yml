@@ -13,6 +13,11 @@
     state: present
   notify: Start nginx
 
+- name: Creates directory
+  ansible.builtin.file:
+    path: /etc/nginx/conf.d
+    state: directory
+
 - name: create configuration file
   template:
     src: nginx.j2

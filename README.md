@@ -6,4 +6,3 @@
 # Для запуска необходимо в hosts добавить переменную fqdn, например ubuntu.otus.vctr.su fqdn=ubuntu.otus.vctr.su в раздел webservers
 # Файлы def.yaml и test.yaml были использованы для тестов
 # 
-# 
